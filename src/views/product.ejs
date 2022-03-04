@@ -1,5 +1,38 @@
 <%- include ('partials/_header') %>
 
+<table class="table table-hover text-center">
+    <tbody>
+    <% if (data) { %> 
+        <tr class="table-active">
+        <% for(var i = 0; i < data.length; i++) { %>
+
+        <td>
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="<%= data[i].url_image %>" alt="NO IMAGEN">
+                <div class="card-body">
+                  <h5 class="card-title"><%= data[i].name %></h5>
+                  <h5 class="card-text">
+                    $<%= data[i].price%>
+                  </h5>
+                  <h6 class="card-text text-primary bold">
+                   <strong> %<%= data[i].discount%></strong>
+                  </h6> 
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>  
+
+        </td>
+       <% if ( i% 4 == 3 ){ %>
+       </tr> 
+    <% } %>
+    
+    <% } %>
+
+    <% } %>
+      
+    </tbody>
+  </table>
+ 
+  <div class="card" style="width: 18rem;">
 
 <%- include ('partials/_footer') %>
 
