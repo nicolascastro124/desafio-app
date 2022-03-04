@@ -1,13 +1,22 @@
 <%- include ('partials/_header') %>
-
+<!-- vista de la pagina principal la cual es utilizada durante en uso de la pagina web-->
 <table class="table table-hover text-center">
+
+        <!-- Obtencion de los datos desde la BD, la cual desde el controlador 
+        de producto lleva el nombre de data-->
     <tbody>
     <% if (data) { %> 
         <tr class="table-active">
+
+        <!--
+            Recorriendo el arreglo con los datos obtenidos por medio de un 
+            ciclo que los recorre de uno en uno e ira creando los respectivos cuadros con el item
+        -->
         <% for(var i = 0; i < data.length; i++) { %>
 
         <td>
             <div class="card" style="width: 18rem;">
+              
                 <img class="card-img-top" src="<%= data[i].url_image %>" alt="NO IMAGEN">
                 <div class="card-body">
                   <h5 class="card-title"><%= data[i].name %></h5>
@@ -16,11 +25,18 @@
                   </h5>
                   <h6 class="card-text text-primary bold">
                    <strong> %<%= data[i].discount%></strong>
+                   
                   </h6> 
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                  
+                  
                 </div>  
 
         </td>
+          <!--
+          Operacion por medio de modulo de 4, si este nos arroja como resultado 3, 
+          pasara a la siguiente fila en la tabla, logrando que los items esten acomodados
+           de 4 en 4 en la vista
+          -->
        <% if ( i% 4 == 3 ){ %>
        </tr> 
     <% } %>

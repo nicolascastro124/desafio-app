@@ -1,3 +1,6 @@
+
+//exportaciones necesarias para el funcionamiento de la aplicacion
+//requiriendo todas las dependencias de la configuracion
 const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
@@ -6,18 +9,24 @@ const myConnection = require('express-myconnection');
 
 const app = express();
 
-// importing routes
+//-----------------//
+// importacion de rutas
 const productRoutes = require('./routes/product');
+
 const { urlencoded } = require('express');
 
 
+//-----------------//
 // settings
 app.set('port', process.env.PORT || 3000);
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views')); 
 
+//-----------------//
 //middlewares
 app.use(morgan('dev'));
+
+//conexion a BD entregada para la realizacion de este proyecto
 app.use(myConnection(mysql, {
     host: 'mdb-test.c6vunyturrl6.us-west-1.rds.amazonaws.com',
     user: 'bsale_test',
@@ -27,14 +36,20 @@ app.use(myConnection(mysql, {
 }, 'single'));
 app.use(express.urlencoded({extended : false}));
 
-//routes
+//-----------------//
+//Uso de las rutas
+
 app.use('/', productRoutes);
 
+
+//-----------------//
 // static files
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+//-----------------//
 // starting server
 app.listen(app.get('port'), () => {
     console.log('Server on port 3000');
 })
+//-----------------//
