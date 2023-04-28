@@ -7,6 +7,9 @@ const morgan = require('morgan');
 const mysql = require('mysql');
 const myConnection = require('express-myconnection');
 
+const dbConfigPath = path.join(__dirname, 'config', 'db.json');
+const dbConfig = require(dbConfigPath);
+
 const app = express();
 
 //-----------------//
@@ -27,13 +30,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(morgan('dev'));
 
 //conexion a BD entregada para la realizacion de este proyecto
-app.use(myConnection(mysql, {
-    host: 'mdb-test.c6vunyturrl6.us-west-1.rds.amazonaws.com',
-    user: 'bsale_test',
-    password: 'bsale_test',
-    port: '3306',
-    database: 'bsale_test'
-}, 'single'));
+app.use(myConnection(mysql,dbConfigPath, 'single'));
 app.use(express.urlencoded({extended : false}));
 
 //-----------------//
